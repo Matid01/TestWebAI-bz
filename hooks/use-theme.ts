@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { createContext, useContext, useEffect, useState } from 'react'
 
@@ -16,7 +16,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>('dark')
 
   useEffect(() => {
-    // Check for saved theme preference or default to dark
     const savedTheme = localStorage.getItem('theme') as Theme
     if (savedTheme) {
       setTheme(savedTheme)
@@ -24,10 +23,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   useEffect(() => {
-    // Save theme preference
     localStorage.setItem('theme', theme)
-    
-    // Apply theme to document
     if (theme === 'dark') {
       document.documentElement.classList.add('dark')
     } else {
@@ -40,11 +36,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <ThemeContext.Provider value={{ 
-      theme, 
-      toggleTheme, 
-      isDark: theme === 'dark' 
-    }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, isDark: theme === 'dark' }}>
       {children}
     </ThemeContext.Provider>
   )
